@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <title>Home</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br/>
+    <h1>Home</h1>
+    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Jobs" aria-label="Search">
+                        <a class="btn btn-light" href= "">Search</a>
+    </form>
+{#    <form method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.post }}#}
+{#        <br/>#}
+{#        <button type="submit" class="btn btn-light" id="submit">Submit</button>#}
+{##}
+{#    </form>#}
+        <br/>
+        <h3>Listings</h3>
+    <h4>{{ text }}</h4>
+{#    {% for post in posts %}#}
+{#        <h5>Job Title: {{ post.post }}</h5>#}
+{#        <p>Posted by {{ post.user.get_full_name }} on {{ post.date }}</p>#}
+{#    {% endfor %}#}
+    <br/>
+    {% for post in posts %}
+    <div class="card bg-light mb-3" style="max-width: 50rem;" id="cards">
+        <div class="card-header"><h5>{{ post.title }}</h5></div>
+        <div class="card-body">
+            <p class="card-text">
+                <strong>{{ post.post }}</strong>
+            </p>
+            <p class="card-text">
+                <strong>Location: {{ post.location }}</strong>
+            </p>
+            <p class="card-text">
+                <strong>Salary: ${{ post.salary }}</strong>
+            </p>
+
+            <p class="card-text">
+                Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
+            <button type="button" class="btn btn-danger">Apply</button>
+        </div>
+    {{ post.description }}
+    </div>
+        <br/>
+        <br/>
+    {% endfor %}
+
+    </div>
+{% endblock %}

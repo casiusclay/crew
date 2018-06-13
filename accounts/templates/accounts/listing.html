@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <title>Listing</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br>
+    <h1>Job Description</h1>
+        <br/>
+    <div class="card bg-light mb-3" style="max-width: 100rem;" id="cards">
+        <div class="card-header"><h5>Title: {{ listings.post }}</h5></div>
+        <div class="card-body">
+            <p class="card-text">Posted by {{ listings.user.get_full_name }} on {{ listings.created }}</p>
+        <a class="btn btn-danger">Edit</a>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

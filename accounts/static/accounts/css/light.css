@@ -1,0 +1,99 @@
+/* fallback */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.boxContainer {
+    display: table;
+}
+.box {
+    width: 200px;
+    height: 100px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: bottom;
+}
+.toggle {
+  background: none;
+  color: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: block;
+  padding: .3em .6em;
+  margin: 50px;
+  margin-left: 750px;
+
+}
+
+.toggle:hover {
+  background: #ddd;
+  color: #fff;
+  cursor: pointer;
+}
+
+.toggle .toggle-icon {
+  vertical-align: bottom;
+}
+
+body {
+    color:#212529;
+}
+
+body.dark-mode {
+    background-color: #1d1f21;
+    color: #c5c8c6;
+}
+
+body.dark-mode h1{
+    color: rgb(255, 90, 95) !important
+}
+body.dark-mode h2{
+    color: rgb(255, 90, 95) !important
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: rgb(255, 90, 95) !important
+}
+
+/*body.dark-mode a {
+  color: #81a2be;
+}*/
+
+/*body.dark-mode a:hover {
+  border-bottom-color: #7593ad;
+}*/
+
+
+body.dark-mode .toggle {
+  color: #555;
+  background: #333;
+  border-color: #333;
+}
+
+body.dark-mode .toggle:hover {
+  background: #444;
+  border-color: #444;
+  color: #666;
+}
+
+

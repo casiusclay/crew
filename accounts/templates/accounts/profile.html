@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <title>Profile</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br>
+    <h1>Profile</h1>
+        <br/>
+        <img src="{{ user.userprofile.image.url }}" width="240">
+        <br/>
+        <br/>
+        <p><strong>Username:</strong> {{ user }}</p>
+        <p><strong>First name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last name:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Description:</strong> {{ user.userprofile.description }}</p>
+        <p><strong>Phone:</strong> {{ user.userprofile.phone }}</p>
+        <p><strong>City:</strong> {{ user.userprofile.city }}</p>
+        <p><strong>My Website:</strong> {{ user.userprofile.website }}</p>
+    </div>
+
+
+{% endblock %}

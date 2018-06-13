@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <title>Create Listing</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br/>
+    <h1>Create a Listing</h1>
+        <br/>
+    <form method="post">
+        {% csrf_token %}
+        Job title: {{ form.title }}
+        <br/>
+        Job Description: {{ form.post }}
+        <br/>
+        Salary: {{ form.salary }}
+        <br/>
+        Location: {{ form.location }}
+        <br/>
+
+        <button type="submit" class="btn btn-light" id="submit">Submit</button>
+    </form>
+
+    </div>
+
+    <div class="container">
+    <br/>
+    <hr/>
+        <h3>My Listings</h3>
+    <br/>
+    {% for post in posts %}
+   <div class="card bg-light mb-3" style="max-width: 50rem;" id="cards">
+        <div class="card-header"><h5>{{ post.title }}</h5></div>
+      <div class="card-body">
+          <p class="card-text">Job Description: {{ post.post }}</p>
+          <p class="card-text">Location: {{ post.location }}</p>
+          <p class="card-text">Salary: ${{ post.salary }}</p>
+         <p class="card-text">Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
+       <a class="btn btn-light" href= "{%   url 'accounts:listings' post.slug %}">Edit</a>
+       </div>
+   </div>
+        <br/>
+        <br/>
+    {% endfor %}
+    </div>
+
+{% endblock %}
