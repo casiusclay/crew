@@ -9,8 +9,16 @@
     <br/>
     <h1>Home</h1>
     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Jobs" aria-label="Search">
-                        <a class="btn btn-light" href= "">Search</a>
+       <input class="form-control mr-sm-2" id="keywords" name="keywords" type="search" placeholder="Search Jobs" aria-label="Search" value="{{request.GET.keywords}}">
+        <select id="search_by" name="search_by" class="form-control" style="margin-right:5px;">
+          <option value="">Search By</option>
+          <option value="salary" {% if request.GET.search_by == 'salary' %} selected="selected" {% endif %} >Salary</option>
+          <option value="title" {% if request.GET.search_by == 'title' %} selected="selected" {% endif %}>Title</option>
+          <option value="post" {% if request.GET.search_by == 'post' %} selected="selected" {% endif %}>Post</option>
+        </select>
+        <input class="form-control mr-sm-1" id="location" name="location" type="search" placeholder="Location"  value="{{request.GET.location}}">
+
+       <input type="submit" class="btn btn-primary" value="Search">
     </form>
 {#    <form method="post">#}
 {#        {% csrf_token %}#}
