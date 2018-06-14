@@ -1,5 +1,5 @@
 from django import forms
-from home.models import Post
+from home.models import Post, Apply
 
 
 class HomeForm(forms.ModelForm):
@@ -35,3 +35,15 @@ class HomeForm(forms.ModelForm):
         model = Post
         fields = ('post','title','salary','location',)              #tuple unpacking ignored
 
+
+class ApplyForm(forms.ModelForm):
+    class Meta:
+        model = Apply
+        fields = ('add_on',)
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 6
+            })
+
+        }

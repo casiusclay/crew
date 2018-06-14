@@ -1,17 +1,30 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.shortcuts import render, redirect, get_object_or_404
-from home.forms import HomeForm
-from home.models import Post
+from home.forms import HomeForm, ApplyForm
+from home.models import Post, Apply
+from django.contrib.auth.models import User
+
+
+
+def get_or_none(model, *args, **kwargs):
+    try:
+        return model.objects.get(*args, **kwargs)
+    except model.DoesNotExist:
+        return None
 
 class HomeView(TemplateView):
     template_name = 'home.html'
 
-    def get(self, request):
+    def get(self, request, pk=0):
         form = HomeForm()
         posts = Post.objects.all().order_by('-created')
         args = {'form': form, 'posts': posts}
 
         data = {}
+        if pk is not 0:
+            data['success'] = True
+        else:
+            data['success'] = False
         filter_data = {}
         search_by = request.GET.get('search_by')
         keywords = request.GET.get('keywords')
@@ -31,6 +44,21 @@ class HomeView(TemplateView):
         posts = posts.order_by('-id')
         # Fetch data with final conditions.
         data['posts'] = posts.all()
+        data['current_user'] = request.user
+        applied_posts = []
+        if User.objects.filter(pk=request.user.id).first() is not None:
+            data['logged'] = True
+            for post in posts:
+               applied_apply = Apply.objects.filter(post__pk=post.pk).filter(applicant__pk=request.user.id).count()
+               if applied_apply > 0:
+                   print (post.title)
+                   applied_posts.append(post.id)
+
+
+        else:
+            data['logged'] = False
+        data['applied_posts'] = applied_posts
+
 
         return render(request, self.template_name, data)
 
@@ -79,3 +107,39 @@ def listings(request, slug):
 #             countries = countries.filter(industries=form.cleaned_data["industries"])
 #     return render(request, "country/search.html",
 #             {"form": form, "country_list": countries})
+
+
+
+class ApplyCreateView(CreateView):
+    template_name="apply.html"
+    form_class = ApplyForm
+
+
+    def form_valid(self, form):
+        form.instance.applicant = self.request.user
+        post = Post.objects.filter(pk=self.kwargs['pk']).first()
+        form.instance.post = post
+
+        return super(ApplyCreateView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ApplyCreateView, self).get_context_data(**kwargs)
+        context['current_user'] = self.request.user
+
+        return context
+
+
+class PostApplyListView(ListView):
+    template_name = 'postapplys.html'
+    model = Apply
+    context_object_name = 'applys'
+
+    def get_queryset(self):
+        qs = super(PostApplyListView, self).get_queryset()
+        post = Post.objects.filter(pk=self.kwargs['pk']).first()
+        return qs.filter(post__pk=post.id).order_by('-id')
+
+
+class UserProfileView(DetailView):
+    template_name = 'accounts/profile.html'
+    model = User

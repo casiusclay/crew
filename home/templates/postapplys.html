@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+        <title>Applied Users</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    <br/>
+    <h1>Applied Users</h1>
+
+
+
+        <br/>
+        <h3>Listings</h3>
+
+    {% for apply in applys %}
+    <div class="card bg-light mb-3" style="max-width: 50rem;" id="cards">
+        <div class="card-header"><h5>{{ apply.applicant }}</h5></div>
+        <div class="card-body">
+            <p class="card-text">
+                <strong>{{ apply.add_on }}</strong>
+            </p>
+
+        </div>
+        <div class ="card-footer">
+            <a href="{% url 'home:applicant-profile' apply.applicant.id %}">See his/her profile</a>
+        </div>
+
+    </div>
+        <br/>
+        <br/>
+    {% endfor %}
+
+    </div>
+{% endblock %}
