@@ -41,9 +41,10 @@ class ApplyForm(forms.ModelForm):
         model = Apply
         fields = ('add_on',)
         widgets = {
-            'text': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 6
+            'add_on': forms.Textarea(attrs={
+                'class': 'form-control ',
+                'rows': 4,
+
             })
 
         }

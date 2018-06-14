@@ -8,12 +8,15 @@
     <div class="container">
     <br/>
     <h1>Apply</h1>
-        <form method="post" enctype="multipart/form-data">
+        <div class="row" style="padding:15px;">
+        <form method="post" enctype="multipart/form-data" class="form-control">
+            <div class="form-group">
           {% csrf_token %}
           {{ form.as_p }}
-          <input class="btn btn-primary btn-md" type="submit" value="Apply" />
+            </div>
+          <input class="btn btn-primary btn-md" type="submit" value="Apply" style="float:right"/>
         </form>
 
-
+        </div>
     </div>
 {% endblock %}
