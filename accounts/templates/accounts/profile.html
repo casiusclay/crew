@@ -7,17 +7,22 @@
 {% block body %}
     <div class="container">
     <br>
-    <h1>Profile</h1>
+    <h1>{{ user.first_name }}'s Profile</h1>
         <br/>
         <img src="{{ user.userprofile.image.url }}" width="240">
         <br/>
         <br/>
-        <p><strong>Username:</strong> {{ user }}</p>
-        <p><strong>First name:</strong> {{ user.first_name }}</p>
-        <p><strong>Last name:</strong> {{ user.last_name }}</p>
+        <h4><strong>{{ user.first_name }} {{ user.last_name }}</strong></h4>
+        <h5>{{ user }}</h5>
+    <hr/>
+        <p>{{ user.userprofile.description }}</p>
+
         <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Description:</strong> {{ user.userprofile.description }}</p>
+
+        {% if user.userprofile.phone > 0 %}
         <p><strong>Phone:</strong> {{ user.userprofile.phone }}</p>
+        {% endif %}
+
         <p><strong>City:</strong> {{ user.userprofile.city }}</p>
         <p><strong>Website:</strong> {{ user.userprofile.website }}</p>
     </div>
