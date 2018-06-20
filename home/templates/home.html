@@ -14,7 +14,7 @@
           <option value="">Search By</option>
           <option value="salary" {% if request.GET.search_by == 'salary' %} selected="selected" {% endif %} >Salary</option>
           <option value="title" {% if request.GET.search_by == 'title' %} selected="selected" {% endif %}>Title</option>
-          <option value="post" {% if request.GET.search_by == 'post' %} selected="selected" {% endif %}>Post</option>
+          <option value="post" {% if request.GET.search_by == 'post' %} selected="selected" {% endif %}>Keyword</option>
         </select>
         <input class="form-control mr-sm-1" id="location" name="location" type="search" placeholder="Location"  value="{{request.GET.location}}">
 
@@ -74,7 +74,15 @@
     {% if success %}
     <div class="alert alert-success alert-dismissible" role="alert" style="position:fixed;right:10px;bottom:20px;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Great!</strong> You successfully applied for this job. Please wait for the employer to get back to you."
+        <strong>Great!</strong> You successfully applied for this job. Please wait for the employer to get back to you.
         </div>
     {% endif %}
+
+    {% comment %}{% if counter %}
+    <div class="alert alert-success alert-dismissible" role="alert" style="position:fixed;right:10px;bottom:20px;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Success.</strong> You've successfully registered with Crew. :-)
+        </div>
+    {% endif %}{% endcomment %}
+
 {% endblock %}

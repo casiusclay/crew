@@ -59,6 +59,11 @@ body {
     color:#212529;
 }
 
+a {
+    color:#0b74a3;
+}
+
+
 body.dark-mode {
     background-color: #1d1f21;
     color: #c5c8c6;
@@ -94,6 +99,10 @@ body.dark-mode .toggle:hover {
   background: #444;
   border-color: #444;
   color: #666;
+}
+
+hr {
+    border-top: 1px solid #696969;
 }
 
 

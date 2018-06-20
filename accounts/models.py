@@ -6,14 +6,16 @@ from django.conf import settings
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length= 100, default='')
+    description = models.CharField(max_length= 500, default='')
     city = models.CharField(max_length = 100, default='')
-    website = models.URLField(default='')
+    website = models.URLField(default='', blank=True)
     phone = models.IntegerField(default=0)
-    image = models.ImageField(upload_to='profile_image', blank=True, default='enigma/media/profile_image/photo_fc98Hl5.jpg')
+    image = models.ImageField(upload_to='profile_image', blank=True, default='/profile_image/dog.jpg')
 
     def __str__(self):
         return self.user.username
+
+
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:

@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
 
 {% block head %}
-        <title>Applied Users</title>
+        <title>Applicants</title>
 {% endblock %}
 
 {% block body %}
     <div class="container">
     <br/>
-    <h1>Applied Users</h1>
+    <h1>Applicants</h1>
 
 
 
         <br/>
-        <h3>Listings</h3>
+    {% if apply in applys %}
 
+        <h3>Listings</h3>
+    <br/>
     {% for apply in applys %}
     <div class="card bg-light mb-3" style="max-width: 50rem;" id="cards">
         <div class="card-header"><h5>{{ apply.applicant }}</h5></div>
@@ -31,6 +33,12 @@
         <br/>
         <br/>
     {% endfor %}
+        {% else %}
+        <h5>Ralph Waldo Emerson has once said, <strong><i>"Adopt the pace of nature: her secret is patience."</i></strong></h5>
+        <br/>
+        <h5>In the mean time you can <a href={% url 'accounts:create_listing'%}>create a new listing.</a> :-)</h5>
+    {% endif %}
+
 
     </div>
 {% endblock %}

@@ -35,13 +35,16 @@ class HomeView(TemplateView):
         # Build filter conditions.
         if search_by and keywords and search_by in allowed_filter:
             filter_data[search_by + "__icontains"] = keywords
+
         # Build initial Query.
         posts = Post.objects.filter(**filter_data)
+
         # Create order query.
         if location:
             filter_data['location' + "__icontains"] = location
             posts = posts.filter(**filter_data)
         posts = posts.order_by('-id')
+
         # Fetch data with final conditions.
         data['posts'] = posts.all()
         data['current_user'] = request.user

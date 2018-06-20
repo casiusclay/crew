@@ -94,3 +94,5 @@ def listings(request, slug):
     listing = get_object_or_404(Post, slug=slug)
 
     return render(request, 'accounts/listing.html', {'listings': listing,})
+
+

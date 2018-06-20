@@ -39,6 +39,17 @@
           <p class="card-text">Salary: ${{ post.salary }}</p>
          <p class="card-text">Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
        <a class="btn btn-light" href= "{%   url 'accounts:listings' post.slug %}">Edit</a>
+          {%  if logged %}
+                {% if current_user == post.user %}
+                     <a href ="{% url 'home:postapplys' post.id %}" type="button" class="btn btn-danger">View Applicants</a>
+                {% elif post.pk in applied_posts %}
+                     <button type="button" class="btn btn-default" disabled>Applied</button>
+                {% else %}
+                    <a href="{% url 'home:apply' post.id %}" type="button" class="btn btn-danger">Apply</a>
+                {% endif %}
+
+            {% else %}
+            {% endif %}
        </div>
    </div>
         <br/>
