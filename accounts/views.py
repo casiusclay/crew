@@ -2,48 +2,61 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from accounts.forms import (
     RegistationForm,
-    EditProfileForm
+    EditProfileForm,
+    EditProfileForm2
 )
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
 from home.forms import HomeForm
-from home.models import Post
+from home.models import Post, Apply
 
 
 def register(request):
     if request.method =='POST':
         form = RegistationForm(request.POST)
+
         if form.is_valid():
             form.save()
-            return redirect(reverse('home:home'))
+            counter = True
+            args = {'counter': counter}
+            return redirect(reverse('home:home'), args)
     else:
         form = RegistationForm()
 
         args = {'form': form}
         return render(request, 'accounts/reg_form.html', args)
 
+
 @login_required()
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
+
 @login_required()
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
+        form2 = EditProfileForm2(request.POST, request.FILES, instance=request.user.userprofile)
 
-        if form.is_valid():
+        if form.is_valid() and form2.is_valid():
             form.save()
-            return redirect('/account/profile')
+            form2.save()
 
+            return redirect('/account/profile')
 
     else:
         form = EditProfileForm(instance=request.user)
-        args = {'form':form}
+        form2 = EditProfileForm2(instance=request.user.userprofile)
+
+        args = {'form':form, 'form2':form2}
         return render(request, 'accounts/edit_profile.html', args)
+
 
 @login_required()
 def change_password(request):
