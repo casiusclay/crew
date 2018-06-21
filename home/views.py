@@ -29,15 +29,23 @@ class HomeView(TemplateView):
         search_by = request.GET.get('search_by')
         keywords = request.GET.get('keywords')
         location = request.GET.get('location')
+        upper = request.GET.get('upper')
+        lower = request.GET.get('lower')
+        print ('upper', upper)
+        print('lower', lower)
         # Array of Allowed field in filter process.
-        allowed_filter = ['salary', 'title', 'post', 'location']
+        allowed_filter = ['title', 'post', 'location']
 
         # Build filter conditions.
         if search_by and keywords and search_by in allowed_filter:
             filter_data[search_by + "__icontains"] = keywords
 
-        # Build initial Query.
         posts = Post.objects.filter(**filter_data)
+
+        if upper and lower:
+            posts = posts.filter(salary__lte=upper, salary__gte=lower)
+        # Build initial Query.
+
 
         # Create order query.
         if location:

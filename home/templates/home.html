@@ -2,6 +2,50 @@
 
 {% block head %}
         <title>Home</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.3/themes/hot-sneaks/jquery-ui.css" />
+
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+     <script>
+        $(document).ready(function() {
+
+
+      {% if request.GET.upper %}
+        $( "#mySlider" ).slider({
+              range: true,
+              min: 10,
+              max: 50000,
+              values: [ {{ request.GET.lower }}, {{ request.GET.upper }}],
+              slide: function( event, ui ) {
+             $( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+              $("#lower").val(ui.values[ 0 ] );
+            $("#upper").val(ui.values[ 1 ]);
+             }
+          });
+
+          {% else %}
+
+          $( "#mySlider" ).slider({
+              range: true,
+              min: 10,
+              max: 50000,
+              values: [ 10, 50000],
+              slide: function( event, ui ) {
+             $( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+              $("#lower").val(ui.values[ 0 ] );
+            $("#upper").val(ui.values[ 1 ]);
+             }
+          });
+
+        {% endif %}
+        $( "#price" ).val( "$" + $( "#mySlider" ).slider( "values", 0 ) +
+               " - $" + $( "#mySlider" ).slider( "values", 1 ) );
+
+        });
+
+
+
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -12,14 +56,34 @@
        <input class="form-control mr-sm-2" id="keywords" name="keywords" type="search" placeholder="Search Jobs" aria-label="Search" value="{{request.GET.keywords}}">
         <select id="search_by" name="search_by" class="form-control" style="margin-right:5px;">
           <option value="">Search By</option>
-          <option value="salary" {% if request.GET.search_by == 'salary' %} selected="selected" {% endif %} >Salary</option>
+
           <option value="title" {% if request.GET.search_by == 'title' %} selected="selected" {% endif %}>Title</option>
           <option value="post" {% if request.GET.search_by == 'post' %} selected="selected" {% endif %}>Keyword</option>
         </select>
         <input class="form-control mr-sm-1" id="location" name="location" type="search" placeholder="Location"  value="{{request.GET.location}}">
+        <button id="sal_sea" type="button" class="form-control mr-sm-2 dropdown-toggle " data-toggle="dropdown" >
+            salary<span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" style="padding:10px;width:250px;">
 
-       <input type="submit" class="btn btn-primary" value="Search">
+               <div class="">
+                <p>
+                <label for="price" style="font-family:Verdana;">Price Range:</label>
+                <input type="text" id="price" class="form-control" style="border:0; color:#fa4b2a; font-weight:bold;" disabled>
+                </p>
+
+            <div id="mySlider"></div>
+
+            </div>
+          <br>
+        </ul>
+
+    <input type="hidden" name="upper" id="upper" value="{% if request.GET.upper != 0 %} {{ request.GET.upper }} {% else %}0{% endif %}">
+    <input type="hidden" name="lower" id="lower" value="{% if request.GET.lower != 0 %} {{ request.GET.lower }} {% else %}50000{% endif %}">
+
+    <input type="submit" class="btn btn-primary" value="Search">
     </form>
+
 {#    <form method="post">#}
 {#        {% csrf_token %}#}
 {#        {{ form.post }}#}
@@ -54,6 +118,7 @@
             {%  if logged %}
                 {% if current_user == post.user %}
                      <a href ="{% url 'home:postapplys' post.id %}" type="button" class="btn btn-danger">View Applicants</a>
+                    <button id="del_button" class="btn btn-danger " value="{%   url 'accounts:delete_post_home' post.slug %}">Delete</button>
                 {% elif post.pk in applied_posts %}
                      <button type="button" class="btn btn-default" disabled>Applied</button>
                 {% else %}
@@ -85,4 +150,35 @@
         </div>
     {% endif %}{% endcomment %}
 
+        <!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " style="color:#333333;" id="exampleModalLabel">Confirm dialog</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color:#555555;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color:#333333;">
+        Do you really want to delete it? All of this data will be lost.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a id="del_but" type="button" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+/* to show modal via jquery clock event bound to id="modal_button_id" a/button/etc */
+$(document).ready(function() {
+    $('#del_button').click(function () {
+        var link = $(this).val();
+        $('#deleteModal').modal('show');
+        $('#del_but').attr("href", link);
+    });
+
+});
+</script>
 {% endblock %}

@@ -39,6 +39,8 @@
           <p class="card-text">Salary: ${{ post.salary }}</p>
          <p class="card-text">Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
        <a class="btn btn-light" href= "{%   url 'accounts:listings' post.slug %}">Edit</a>
+
+      <button class="btn btn-danger del_button" value="{%   url 'accounts:delete_post' post.slug %}">Delete</button>
           {%  if logged %}
                 {% if current_user == post.user %}
                      <a href ="{% url 'home:postapplys' post.id %}" type="button" class="btn btn-danger">View Applicants</a>
@@ -57,4 +59,37 @@
     {% endfor %}
     </div>
 
+    <!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title " style="color:#333333;" id="exampleModalLabel">Confirm dialog</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color:#555555;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="color:#333333;">
+        Do you really want to delete it? All of this data will be lost.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a id="del_but"type="button" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <script>
+/* to show modal via jquery clock event bound to id="modal_button_id" a/button/etc */
+$(document).ready(function() {
+    $('.del_button').click(function () {
+        var link = $(this).val();
+        $('#deleteModal').modal('show');
+        $('#del_but').attr("href", link);
+    });
+
+});
+</script>
 {% endblock %}

@@ -96,3 +96,17 @@ def listings(request, slug):
     return render(request, 'accounts/listing.html', {'listings': listing,})
 
 
+@login_required()
+def delete_post(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post is not None:
+        post.delete()
+    return redirect(reverse('accounts:create_listing'))
+
+
+@login_required()
+def delete_post_home(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    if post is not None:
+        post.delete()
+    return redirect(reverse('home:home'))
