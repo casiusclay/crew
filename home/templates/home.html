@@ -13,8 +13,8 @@
       {% if request.GET.upper %}
         $( "#mySlider" ).slider({
               range: true,
-              min: 10,
-              max: 50000,
+              min: 0,
+              max: 256000,
               values: [ {{ request.GET.lower }}, {{ request.GET.upper }}],
               slide: function( event, ui ) {
              $( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
@@ -27,9 +27,9 @@
 
           $( "#mySlider" ).slider({
               range: true,
-              min: 10,
-              max: 50000,
-              values: [ 10, 50000],
+              min: 0,
+              max: 256000,
+              values: [ 0, 256000],
               slide: function( event, ui ) {
              $( "#price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
               $("#lower").val(ui.values[ 0 ] );
@@ -51,25 +51,27 @@
 {% block body %}
     <div class="container">
     <br/>
-    <h1>Home</h1>
+    <h1>Search</h1>
+    <br/>
     <form class="form-inline my-2 my-lg-0">
-       <input class="form-control mr-sm-2" id="keywords" name="keywords" type="search" placeholder="Search Jobs" aria-label="Search" value="{{request.GET.keywords}}">
+       <input class="form-control mr-sm-2" id="keywords" name="keywords" type="search" placeholder="Search for Jobs..." aria-label="Search" value="{{request.GET.keywords}}">
         <select id="search_by" name="search_by" class="form-control" style="margin-right:5px;">
           <option value="">Search By</option>
 
           <option value="title" {% if request.GET.search_by == 'title' %} selected="selected" {% endif %}>Title</option>
           <option value="post" {% if request.GET.search_by == 'post' %} selected="selected" {% endif %}>Keyword</option>
         </select>
-        <input class="form-control mr-sm-1" id="location" name="location" type="search" placeholder="Location"  value="{{request.GET.location}}">
+
+        <!--Salary Range Filter-->
         <button id="sal_sea" type="button" class="form-control mr-sm-2 dropdown-toggle " data-toggle="dropdown" >
-            salary<span class="caret"></span>
+            Salary Range<span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" style="padding:10px;width:250px;">
 
                <div class="">
                 <p>
                 <label for="price" style="font-family:Verdana;">Price Range:</label>
-                <input type="text" id="price" class="form-control" style="border:0; color:#fa4b2a; font-weight:bold;" disabled>
+                <input type="text" id="price" class="form-control" style="border:0; color:#444; font-weight:bold;" disabled>
                 </p>
 
             <div id="mySlider"></div>
@@ -78,11 +80,14 @@
           <br>
         </ul>
 
-    <input type="hidden" name="upper" id="upper" value="{% if request.GET.upper != 0 %} {{ request.GET.upper }} {% else %}0{% endif %}">
-    <input type="hidden" name="lower" id="lower" value="{% if request.GET.lower != 0 %} {{ request.GET.lower }} {% else %}50000{% endif %}">
+    <input class="form-control mr-sm-1" id="location" name="location" type="search" placeholder="Location"  value="{{request.GET.location}}">
 
-    <input type="submit" class="btn btn-primary" value="Search">
+    <input type="hidden" name="upper" id="upper" value="{% if request.GET.upper != 0 %} {{ request.GET.upper }} {% else %}0{% endif %}">
+    <input type="hidden" name="lower" id="lower" value="{% if request.GET.lower != 0 %} {{ request.GET.lower }} {% else %}256000{% endif %}">
+
+    <input type="submit" class="btn btn-danger" value="Search">
     </form>
+    <br/>
 
 {#    <form method="post">#}
 {#        {% csrf_token %}#}
@@ -92,7 +97,7 @@
 {##}
 {#    </form>#}
         <br/>
-        <h3>Listings</h3>
+        <h3>Job Listings</h3>
     <h4>{{ text }}</h4>
 {#    {% for post in posts %}#}
 {#        <h5>Job Title: {{ post.post }}</h5>#}

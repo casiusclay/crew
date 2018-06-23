@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-        <title>Create Listing</title>
+        <title>Create Listings</title>
 {% endblock %}
 
 {% block body %}
@@ -38,7 +38,7 @@
           <p class="card-text">Location: {{ post.location }}</p>
           <p class="card-text">Salary: ${{ post.salary }}</p>
          <p class="card-text">Posted by {{ post.user.get_full_name }} on {{ post.created }}</p>
-       <a class="btn btn-light" href= "{%   url 'accounts:listings' post.slug %}">Edit</a>
+          <button type="button" class="btn btn-danger" data-toggle="popover" title="Coming soon" data-content="The Crew is working on it. ;)">Edit</button>
 
       <button class="btn btn-danger del_button" value="{%   url 'accounts:delete_post' post.slug %}">Delete</button>
           {%  if logged %}
@@ -91,5 +91,10 @@ $(document).ready(function() {
     });
 
 });
+
+//To show overlay for Edit button which is a coming soon feature.
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
 </script>
 {% endblock %}

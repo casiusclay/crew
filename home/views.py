@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 
 
 
-def get_or_none(model, *args, **kwargs):
-    try:
-        return model.objects.get(*args, **kwargs)
-    except model.DoesNotExist:
-        return None
+# def get_or_none(model, *args, **kwargs):
+#     try:
+#         return model.objects.get(*args, **kwargs)
+#     except model.DoesNotExist:
+#         return None
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -31,8 +31,9 @@ class HomeView(TemplateView):
         location = request.GET.get('location')
         upper = request.GET.get('upper')
         lower = request.GET.get('lower')
-        print ('upper', upper)
+        print('upper', upper)
         print('lower', lower)
+
         # Array of Allowed field in filter process.
         allowed_filter = ['title', 'post', 'location']
 
@@ -152,5 +153,5 @@ class PostApplyListView(ListView):
 
 
 class UserProfileView(DetailView):
-    template_name = 'accounts/profile.html'
-    model = User
+        template_name = 'accounts/profile.html'
+        model = User

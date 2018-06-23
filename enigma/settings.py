@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'enigma/media')
 
 # When user logs in or registers for the first time, they will be redirected to the /account/ url/
@@ -135,7 +135,3 @@ LOGIN_URL = '/account/login/'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 8000
 
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}

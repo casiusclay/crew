@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Logged Out</title>
+{% endblock %}
 {% block body %}
     <br>
  <div class="container">
+  <div class="text-center">
     <h1>You've logged out.</h1>
      <br>
-        <p>
+        <h5>
             May the force be with you, young padawan.
-        </p>
- </div>
+        </h5>
+  </div>
+    <img src="{% static "cantina_band.gif" %}" class="center-block" alt="cantinaband" id="cantinaband" style="width:550px;height:400px;"/>
+    </div>
 
+    <div class="text-center">
+<h5><a href="{%   url 'accounts:login' %}">Sign in again?</a></h5>
+    </div>
 {% endblock %}

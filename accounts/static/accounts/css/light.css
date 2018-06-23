@@ -7,6 +7,8 @@
   src: url(https://fonts.gstatic.com/s/materialicons/v38/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
 
+
+/*Dark Mode Toggle Box*/
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -26,6 +28,7 @@
 .boxContainer {
     display: table;
 }
+
 .box {
     width: 200px;
     height: 100px;
@@ -41,7 +44,7 @@
   display: block;
   padding: .3em .6em;
   margin: 50px;
-  margin-left: 750px;
+  margin-left: 737px;
 
 }
 
@@ -53,14 +56,25 @@
 
 .toggle .toggle-icon {
   vertical-align: bottom;
+
 }
 
+/*-------------------------------------------------------*/
+
+container {
+
+}
 body {
     color:#212529;
+    margin-bottom:50px;
 }
 
 a {
     color:#0b74a3;
+}
+
+a:link {
+    text-decoration: none;
 }
 
 
@@ -105,9 +119,36 @@ hr {
     border-top: 1px solid #696969;
 }
 
+footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+    height: 50px;
+}
+#footer-links a
+{
+    font-size: 12px;
 
+}
 
+#crewcodile {
+    height: 50%;
+    width: 30%;
+    float:right
+}
 
+#some_random_image{
+    height: 60px;
+    width: 20px;
+}
+
+#cantinaband{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 

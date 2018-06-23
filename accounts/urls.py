@@ -11,7 +11,7 @@ app_name='accounts'
 
 #the 'includes' in enigma\urls.py directly refers to this.
 urlpatterns = [
-    url(r'^login/$', login, {'template_name': 'accounts/login.html'}),
+    url(r'^login/$', login, {'template_name': 'accounts/login.html'}, name='login'),
     url(r'^logout/$', logout, {'template_name': 'accounts/logout.html'}),
     url(r'^register/$', views.register, name='register'),
     url(r'^profile/$', views.view_profile, name='view_profile'),
@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^reset-password/complete/$', password_reset_complete,{'template_name': 'accounts/reset_password_complete.html'}, name='password_reset_complete'),
     url(r'^create-listing/$', create_listing, name='create_listing'),
     url(r'^listing/(?P<slug>[\w-]+)/$', views.listings, name='listings'),
-    url(r'^delete_post/(?P<slug>[\w-]+)/$', views.delete_post, name='delete_post'),
-    url(r'^delete_post_home/(?P<slug>[\w-]+)/$', views.delete_post_home, name='delete_post_home'),
+    url(r'^delete_post/(?P<slug>[\w-]+)/$', views.delete_listing, name='delete_post'),
+    url(r'^delete_post_home/(?P<slug>[\w-]+)/$', views.delete_listing_home, name='delete_post_home'),
 
 ]

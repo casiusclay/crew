@@ -22,9 +22,15 @@ def register(request):
 
         if form.is_valid():
             form.save()
-            counter = True
-            args = {'counter': counter}
-            return redirect(reverse('home:home'), args)
+            messages.success(request, 'you successfully created your Crew account.')
+            return redirect(reverse('accounts:login'))
+
+        else:
+            form = RegistationForm(request.POST)
+            args = {'form':form}
+            return render(request, 'accounts/reg_form.html', args)
+
+
     else:
         form = RegistationForm()
 
@@ -97,7 +103,7 @@ def listings(request, slug):
 
 
 @login_required()
-def delete_post(request, slug):
+def delete_listing(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if post is not None:
         post.delete()
@@ -105,7 +111,7 @@ def delete_post(request, slug):
 
 
 @login_required()
-def delete_post_home(request, slug):
+def delete_listing_home(request, slug):
     post = get_object_or_404(Post, slug=slug)
     if post is not None:
         post.delete()

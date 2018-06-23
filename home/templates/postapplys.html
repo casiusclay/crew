@@ -12,7 +12,6 @@
 
 
         <br/>
-    {% if apply in applys %}
 
         <h3>Listings</h3>
     <br/>
@@ -33,11 +32,6 @@
         <br/>
         <br/>
     {% endfor %}
-        {% else %}
-        <h5>Ralph Waldo Emerson has once said, <strong><i>"Adopt the pace of nature: her secret is patience."</i></strong></h5>
-        <br/>
-        <h5>In the mean time you can <a href={% url 'accounts:create_listing'%}>create a new listing.</a> :-)</h5>
-    {% endif %}
 
 
     </div>
