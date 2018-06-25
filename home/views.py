@@ -43,7 +43,7 @@ class HomeView(TemplateView):
 
         posts = Post.objects.filter(**filter_data)
 
-        if upper and lower is not None:
+        if isNum(upper) and isNum(lower):
             posts = posts.filter(salary__lte=upper, salary__gte=lower)
 
 
@@ -157,3 +157,11 @@ class PostApplyListView(ListView):
 class UserProfileView(DetailView):
         template_name = 'accounts/profile.html'
         model = User
+
+
+def isNum(data):
+    try:
+        int(data)
+        return True
+    except Exception as e:
+        return False
