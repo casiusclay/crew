@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
         <title>Edit Profile</title>
@@ -6,6 +7,8 @@
 
 {% block body %}
     <div class="container">
+    <div class="row">
+        <div class="col-md-6">
     <br/>
     <h1>Edit Profile</h1>
         <br/>
@@ -13,10 +16,16 @@
             {% csrf_token %}
             {{ form.as_p }}
             {{ form2.as_p }}
-
-            <button type="submit">Submit</button>
+        <br/>
+            <button type="submit" class="btn btn-danger">I'm done editing</button>
         </form>
         <br>
+            </div>
+
+    <div class="col-md-5">
+    <img src="{% static "crew-background5.png" %}" alt="crew-worthy" id="crew-worthy" style="width:400px;height:300px;margin-top:80px;"/>
+    </div>
+    </div>
     </div>
 
 

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head %}
         <title>Home</title>
@@ -175,6 +176,13 @@
     </div>
   </div>
 </div>
+
+<div class="text-center">
+    <img src="{% static "crew-background3.png" %}" alt="community" id="community" style="width:900px;height:300px"/>
+    </div>
+
+
+
   <script>
 /* to show modal via jquery clock event bound to id="modal_button_id" a/button/etc */
 $(document).ready(function() {

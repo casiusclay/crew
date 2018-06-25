@@ -41,10 +41,10 @@
   color: #ddd;
   border: 1px solid #ddd;
   border-radius: 5px;
-  display: block;
+  display: inline-block;
   padding: .3em .6em;
   margin: 50px;
-  margin-left: 737px;
+  margin-left: 820px;
 
 }
 
@@ -150,6 +150,10 @@ footer {
     margin-right: auto;
 }
 
+#copyright-stuff{
+    font-size: 12px;
+    font-weight: bold;
+}
 
 
 

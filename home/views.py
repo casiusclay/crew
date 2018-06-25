@@ -43,8 +43,10 @@ class HomeView(TemplateView):
 
         posts = Post.objects.filter(**filter_data)
 
-        if upper and lower:
+        if upper and lower is not None:
             posts = posts.filter(salary__lte=upper, salary__gte=lower)
+
+
         # Build initial Query.
 
 
