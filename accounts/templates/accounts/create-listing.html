@@ -10,16 +10,38 @@
     <h1>Create a Listing</h1>
         <br/>
     <form method="post">
-        {% csrf_token %}
-        Job title: {{ form.title }}
-        <br/>
-        Job Description: {{ form.post }}
-        <br/>
-        Salary: {{ form.salary }}
-        <br/>
-        Location: {{ form.location }}
-        <br/>
+{#        {% csrf_token %}#}
+{#        Job title: {{ form.title }}#}
+{#        <br/>#}
+{#        Job Description: {{ form.post }}#}
+{#        <br/>#}
+{#        Salary: {{ form.salary }}#}
+{#        <br/>#}
+{#        Location: {{ form.location }}#}
+{#        <br/>#}
+{##}
+{#        {% if messages %}#}
+{#            <ul>#}
+{#                {% for message in messages %}#}
+{#                <li>{{ message }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+            {% csrf_token %}
+{#            {{ form.as_p }}#}
 
+        {% for field in form %}
+        <div class="submit-link-row">{{ field.label_tag }} <br> {{ field }}</div>
+
+        {% if form.errors %}
+            {% for error in field.errors %}
+            <p class="error-message" style="color:darkred;float:right;">
+                <i>{{ error|escape }}</i>
+            </p>
+            {% endfor %}
+        {% endif %}
+            <br>
+        {% endfor %}
         <button type="submit" class="btn btn-danger" id="submit">Create</button>
     </form>
 

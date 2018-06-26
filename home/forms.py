@@ -35,6 +35,15 @@ class HomeForm(forms.ModelForm):
         model = Post
         fields = ('post','title','salary','location',)              #tuple unpacking ignored
 
+    def clean_salary(self):
+        salary = self.cleaned_data.get('salary')
+        if int(salary) > 256000:
+            raise forms.ValidationError("Salary should not be larger than 256,000$.")
+        elif int(salary) <0:
+            raise forms.ValidationError("Salary should be positive.")
+
+        return salary
+
 
 class ApplyForm(forms.ModelForm):
     class Meta:
